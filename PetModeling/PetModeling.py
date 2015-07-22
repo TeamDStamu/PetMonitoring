@@ -145,7 +145,7 @@ values = {
 data = json.dumps(values)
 clen = len(data)
 
-'''
+
 
 # make post request - upload data to the server
 req = urllib2.Request(url, data, {'Content-Type': 'application/json', 'Content-Length': clen})
@@ -155,4 +155,3 @@ print response.info()
 the_page = response.read()
 print the_page
 
-'''
