@@ -9,6 +9,14 @@ router.get('/', function(req, res, next) {
   //res.sendFile('index.html');
 });
 
+router.post('/petm/json', function(req, res, next){
+    var db = req.db;
+    var petCollection = db.get('PetM');
+    petCollection.find({},{}, function(e, docs){
+        writeJSONHead(docs, req, res);
+    });
+});
+
 router.get('/petm/json/pie', function(req, res, next){
     /*var json1 = [200, 400, 500, 150];
     var json2 = [300, 160, 434, 234];
@@ -57,6 +65,8 @@ router.get('/petm/json/chart', function(req, res, next){
     var db = req.db;
     var petCollection = db.get('PetM');
     petCollection.find({},{}, function(e, docs){
+        
+        //console.log(docs.length);
         
         if(e != null){
             console.log(e);
@@ -139,10 +149,10 @@ router.post('/petm/json/insert', function(req, res){
     
     var petCollection = db.get('PetM');
     
-    //console.log(req.body);
+    //console.log(data);
     
     //First thing is to remove all data from collection
-    petCollection.remove({a:1}, {w:1},function(err, removedDocs){
+    petCollection.remove({},function(err, removedDocs){
         if(err){
             console.log(err);
             writeJSONHead({ resultId : 255 }, req, res);
